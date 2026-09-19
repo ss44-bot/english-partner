@@ -7,8 +7,16 @@
 
 # 🔗 چطور بازش کنم؟
 
+## لینک عمومی GitHub Pages
+**https://ss44-bot.github.io/english-partner/**
+
+> یک‌بار (صاحب ریپو): [Settings → Pages](https://github.com/ss44-bot/english-partner/settings/pages) → Source = **GitHub Actions** → بعد workflow سبز می‌شود.
+
 ## روی کامپیوتر (همین حالا)
 پیش‌نمایش زنده‌ای که در چت باز شده (برچسب: **English Partner app**) — یا آدرس `http://localhost:8000` وقتی خودت اجرا کنی.
+
+ریپو: https://github.com/ss44-bot/english-partner
+PR: https://github.com/ss44-bot/english-partner/pull/1
 
 ## روی آیفون (نصب مثل اپ) 📲
 1. آدرس اپ را در **سافاری** باز کن (نه کروم).

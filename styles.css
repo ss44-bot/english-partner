@@ -1,6 +1,6 @@
 :root{
   --bg:#0f1115; --card:#171a21; --card2:#1e222b; --line:#2a2f3a;
-  --txt:#e8ecf3; --dim:#9aa4b6; --acc:#4ade80; --acc2:#60a5fa; --warn:#fbbf24; --bad:#f87171; --gold:#f5c46b;
+  --txt:#e8ecf3; --dim:#9aa4b6; --acc:#4ade80; --acc2:#60a5fa; --warn:#fbbf24; --bad:#f87171; --gold:#f5c46b; --ok:#6ee7b7;
   --r:14px; --nav:64px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
