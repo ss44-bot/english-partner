@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Partner — دستیار زبان من</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f1115">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="English Partner">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">🎧 <b>English&nbsp;Partner</b><span id="netBadge" class="badge off">آفلاین</span></div>
+  <div class="tools">
+    <button id="btnStop" class="ico" title="توقف پخش">⏹</button>
+    <button id="btnSettingsTop" class="ico" title="تنظیمات">⚙️</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ خانه ============ -->
+  <section class="tab on" id="tab-home">
+    <div class="card" id="homeHero"></div>
+    <div class="card" id="homeDue"></div>
+    <div class="card" id="homeNext"></div>
+    <div class="card" id="journalCard">
+      <div class="row"><b class="grow">📓 دفتر چهار جمله (امروز)</b><span class="pill" id="journalDate"></span></div>
+      <textarea id="journal" dir="ltr" rows="4" placeholder="4 sentences about today — real things you'd actually say…"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button class="small" id="btnJournalSave">💾 ذخیره</button>
+        <button class="small" id="btnJournalHistory">📚 روزهای قبل</button>
+        <button class="small" id="btnJournalExport">📤 خروجی</button>
+      </div>
+      <div id="journalHist" class="small muted"></div>
+    </div>
+  </section>
+
+  <!-- ============ جلسه (چت با مربی) ============ -->
+  <section class="tab" id="tab-lesson">
+    <div class="card tight">
+      <div class="row">
+        <select id="stageSel" class="grow"></select>
+        <button id="btnStage" class="primary">▶ ساخت پیام</button>
+      </div>
+      <div class="muted small" id="stageHint"></div>
+    </div>
+    <div class="card tight">
+      <div class="row small">
+        <b class="grow">🎬 صحنه (یادگیری بصری)</b>
+        <button id="btnSceneBuild" class="small">صحنه بساز</button>
+        <button id="btnSceneImg" class="small">📷 عکس صحنه</button>
+      </div>
+      <div class="muted small">«صحنه بساز» یک موقعیت تصویری می‌سازد که خودت را داخلش ببینی. «عکس صحنه» اجازه می‌دهد عکس واقعی (اداره، آشپزخانه، مغازه) بدهی تا مربی روی همان تصویر درس بسازد.</div>
+    </div>
+    <div id="chatLog" class="chat"></div>
+    <div class="composer">
+      <textarea id="chatInput" dir="auto" rows="2" placeholder="جوابت را بنویس… (فارسی هم اشکالی ندارد)"></textarea>
+      <div class="row">
+        <button id="btnImgChat" class="ico" title="عکس بفرست">📷</button>
+        <button id="btnSend" class="primary grow">ارسال</button>
+        <button id="btnClearChat" class="ico" title="پاک کردن چت">🗑</button>
+      </div>
+    </div>
+    <input type="file" accept="image/*" id="chatFile" hidden>
+  </section>
+
+  <!-- ============ صفحه‌ی کتاب ============ -->
+  <section class="tab" id="tab-page">
+    <div class="card">
+      <h3>📸 عکس صفحه‌ی کتاب → درس</h3>
+      <p class="muted small">عکس واضح بگیر (شماره‌ی صفحه و عنوان واحد در کادر باشد). می‌توانی چند عکس از چند کتاب بدهی تا یک درس واحد بسازد.</p>
+      <input type="file" accept="image/*" id="pageFiles" multiple capture="environment">
+      <label class="lbl">کتاب و واحد (اختیاری — اگر ننویسی خودم تشخیص می‌دهم)</label>
+      <input id="bookName" dir="ltr" placeholder="Oxford Word Skills Intermediate — Unit 26">
+      <label class="lbl">حالت تحلیل</label>
+      <select id="pageMode">
+        <option value="single">یک صفحه، درس کامل</option>
+        <option value="cross">بررسی متقابل در ۷ کتاب من</option>
+        <option value="cluster">چند کتاب، یک موضوع (خوشه‌ای)</option>
+      </select>
+      <button id="btnAnalyze" class="primary block">🔍 تحلیل و ساخت درس</button>
+    </div>
+    <div id="pageOut" class="chat"></div>
+  </section>
+
+  <!-- ============ گفتن و شدووینگ ============ -->
+  <section class="tab" id="tab-speak">
+    <div class="card">
+      <div class="muted small">تمرین تلفظ و شدووینگ — مدل را گوش بده، بعد خودت بگو و مقایسه کن</div>
+      <div id="speakEn" class="chunkEn" dir="ltr">…</div>
+      <div id="speakFa" class="chunkFa">…</div>
+      <div class="row">
+        <button id="btnPlay" class="primary">🔊 صدای مدل</button>
+        <button id="btnSlow">🐢 آهسته</button>
+        <button id="btnRec" class="rec">🎙 ضبط کن</button>
+      </div>
+      <div class="row">
+        <button id="btnCompare" class="grow">⚖️ مدل ← من</button>
+        <button id="btnPrevChunk">◀ قبلی</button>
+        <button id="btnNextChunk" class="grow">بعدی ▶</button>
+      </div>
+      <div class="row">
+        <label class="small grow">سرعت: <input type="range" id="rate" min="0.6" max="1.2" step="0.05"></label>
+        <label class="small">لحن: <select id="accentSel"><option value="en-US">آمریکایی</option><option value="en-GB">بریتانیایی</option></select></label>
+      </div>
+      <div class="row"><span class="muted small" id="recState">آماده</span></div>
+      <audio id="myAudio" controls hidden class="myAudio"></audio>
+    </div>
+
+    <!-- حالت سایه (شدووینگ بلند) -->
+    <div class="card">
+      <div class="row"><b class="grow">🔁 حالت سایه (Shadowing)</b><span class="pill" id="loopState">خاموش</span></div>
+      <div class="row small">
+        <label class="small grow">وقفه‌ی تکرار من: <select id="loopGap">
+          <option value="2">۲ ثانیه</option><option value="3" selected>۳ ثانیه</option>
+          <option value="5">۵ ثانیه</option><option value="8">۸ ثانیه</option></select></label>
+        <label class="small grow">تعداد دور: <select id="loopReps">
+          <option>2</option><option selected>3</option><option>5</option></select></label>
+      </div>
+      <div class="row">
+        <button id="btnLoop" class="primary grow">▶ شروع حالت سایه</button>
+        <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="loopAuto" style="width:auto;min-height:auto"> خط بعد خودکار</label>
+      </div>
+      <details style="margin-top:6px">
+        <summary class="small muted" style="cursor:pointer">پروتکل ۷ مرحله‌ای شدووینگ</summary>
+        <ol class="small muted" style="margin:8px 1.1em;padding:0;line-height:2">
+          <li>گوش بده، فقط گوش (بدون متن)</li>
+          <li>با متن گوش بده، هم‌زمان بخوان</li>
+          <li>سایه‌ی هم‌زمان: با خودِ صدا بلند بگو (نه بعدش)</li>
+          <li>سایه با تأخیر ۱ ثانیه</li>
+          <li>بدون صدا، خودت تنها بخوان</li>
+          <li>ضبط کن و با اصل مقایسه کن (ریتم، استرس، اتصال)</li>
+          <li>بار سوم از حافظه بگو</li>
+        </ol>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="row"><b class="grow">ضبط‌های من</b><button id="btnDelRecs" class="small">پاک کردن همه</button></div>
+      <div id="recList" class="small"></div>
+    </div>
+  </section>
+
+  <!-- ============ ویدیو (روش ۴ پاس) ============ -->
+  <section class="tab" id="tab-video">
+    <div class="card">
+      <div class="row">
+        <select id="videoMod" class="grow"></select>
+        <button id="btnVideoPrompt" class="primary">▶ با مربی</button>
+      </div>
+      <div class="muted small">روش ۴ پاس: تماشا → ریویو → <b>من در صحنه</b> → مقایسه. یک ویدیو، سه روز.</div>
+    </div>
+    <div class="card" id="videoSearch"></div>
+    <div class="card">
+      <div class="row"><b class="grow">⏱ تایمر تمرین</b><span class="timer" id="vTimer">00:00</span></div>
+      <div class="row">
+        <button id="btnVTimer" class="primary grow">شروع</button>
+        <button id="btnVTimerReset" class="grow">صفر کردن</button>
+      </div>
+      <div style="margin-top:8px" id="passList"></div>
+      <div class="muted small" id="passHint" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <div class="row"><b class="grow">🧺 برداشت چانک‌ها</b><span class="pill" id="harvestCount">۰</span></div>
+      <textarea id="harvest" dir="ltr" rows="4" placeholder="چانک‌هایی که از ویدیو برداشتم — هر خط یک عبارت…"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button class="small primary" id="btnHarvestSpeak">🗣 به تمرین گفتن</button>
+        <button class="small" id="btnHarvestCards">🃏 ساخت کارت</button>
+        <button class="small" id="btnHarvestClear">🗑 پاک</button>
+      </div>
+    </div>
+    <div class="card" id="ytChannels"></div>
+  </section>
+
+  <!-- ============ موقعیت‌ها (۱۵۰ موقعیت) ============ -->
+  <section class="tab" id="tab-situations">
+    <div class="card">
+      <div class="row"><b class="grow">🗺 نقشه‌ی موقعیت‌ها</b><span class="pill" id="sitProgress">۰ / ۰</span></div>
+      <div class="row small">
+        <select id="sitFilter" class="grow">
+          <option value="all">همه</option>
+          <option value="todo">شروع‌نشده‌ها</option>
+          <option value="doing">در حال یادگیری</option>
+          <option value="done">مسلط‌ها</option>
+        </select>
+        <select id="sitJump" class="grow"><option value="">پرش به ماژول…</option></select>
+      </div>
+      <div class="muted small">وضعیت هر موقعیت را با دکمه‌ی مربع تغییر بده: ⬜ شروع‌نشده → 🟡 در حال یادگیری → 🟢 مسلط. با «▶» همان موقعیت را به جلسه می‌فرستیم.</div>
+    </div>
+    <div id="sitList"></div>
+  </section>
+
+  <!-- ============ بیشتر ============ -->
+  <section class="tab" id="tab-more">
+    <div class="card" id="moreStats"></div>
+    <div class="card">
+      <div class="row"><b class="grow">🧭 دسترسی سریع</b></div>
+      <div class="grid2">
+        <button data-goto="cards">🃏 کارت‌ها</button>
+        <button data-goto="prompts">📋 پرامت‌ها</button>
+        <button data-goto="situations">🗺 موقعیت‌ها</button>
+        <button data-goto="video">🎬 ویدیو</button>
+        <button data-goto="settings">⚙️ تنظیمات</button>
+        <button data-goto="home">🏠 خانه</button>
+      </div>
+    </div>
+    <div class="card" id="mistakesCard"></div>
+    <div class="card" id="weekCard"></div>
+    <div class="card" id="coverageCard"></div>
+    <div class="card">
+      <h3>ℹ️ راهنما</h3>
+      <ul class="small help">
+        <li><b>آیفون:</b> سافاری → Share → «Add to Home Screen».</li>
+        <li><b>کلید API</b> برای تحلیل عکس، چت با مربی و معادل‌های نیتیو لازم است.</li>
+        <li><b>خواندن صوتی</b> روی هر پیام، فقط خطوط انگلیسی را می‌خواند (فارسی را رد می‌کند).</li>
+        <li><b>ضبط صدا</b> به https و اجازه‌ی میکروفون نیاز دارد.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ واژه‌نامه و ترجمه ============ -->
+  <section class="tab" id="tab-dict">
+    <div class="card tight">
+      <div class="row">
+        <input id="dictQ" dir="ltr" class="grow" placeholder="word or phrase…">
+        <button id="btnDict" class="primary">جست‌وجو</button>
+      </div>
+      <div class="row small">
+        <button data-quick="collocation">همنشینی‌ها</button>
+        <button data-quick="example">مثال در جمله</button>
+        <button data-quick="native">معادل نیتیو</button>
+        <button data-quick="fa">ترجمه فارسی</button>
+      </div>
+    </div>
+    <div id="dictOut"></div>
+  </section>
+
+  <!-- ============ کارت‌ها (مرور فاصله‌دار) ============ -->
+  <section class="tab" id="tab-cards">
+    <div class="card" id="cardsDue"></div>
+    <div class="card">
+      <div class="row">
+        <input id="cardEn" dir="ltr" class="grow" placeholder="English">
+        <input id="cardFa" dir="auto" class="grow" placeholder="فارسی">
+      </div>
+      <div class="row">
+        <input id="cardCode" dir="ltr" class="grow" placeholder="کد موقعیت (مثلاً M01-S1)">
+        <button id="btnAddCard" class="primary">+ کارت</button>
+      </div>
+      <div class="row">
+        <button id="btnExportCsv" class="small">📤 خروجی Anki (CSV)</button>
+        <button id="btnExportJson" class="small">📥 پشتیبان JSON</button>
+      </div>
+    </div>
+    <div id="cardsList"></div>
+  </section>
+
+  <!-- ============ پرامت‌ها ============ -->
+  <section class="tab" id="tab-prompts">
+    <div class="card tight">
+      <div class="muted small">هر پرامت را کپی کن و (با عکس یا در چت) بفرست — یا دکمه‌ی «فرستادن» را بزن.</div>
+    </div>
+    <div id="promptList"></div>
+  </section>
+
+  <!-- ============ تنظیمات ============ -->
+  <section class="tab" id="tab-settings">
+    <div class="card">
+      <h3>🤖 اتصال به هوش مصنوعی</h3>
+      <label class="lbl">سرویس‌دهنده</label>
+      <select id="setProvider"></select>
+      <label class="lbl">کلید API</label>
+      <input id="setKey" type="password" dir="ltr" placeholder="sk-… (فقط روی گوشی خودت ذخیره می‌شود)">
+      <label class="lbl">آدرس سرور (Base URL) — برای OpenRouter/Groq/local</label>
+      <input id="setBase" dir="ltr" placeholder="https://api.openai.com/v1">
+      <label class="lbl">مدل</label>
+      <input id="setModel" dir="ltr" placeholder="gpt-4o-mini">
+      <button id="btnTest" class="block">🔌 تست اتصال</button>
+      <div id="testOut" class="small muted"></div>
+      <p class="muted small">🔒 کلید فقط در همین دستگاه (localStorage) می‌ماند و به هیچ‌جای دیگری نمی‌رود.</p>
+    </div>
+    <div class="card">
+      <h3>🔊 صدا</h3>
+      <label class="lbl">لهجه</label>
+      <select id="setAccent"><option value="en-US">آمریکایی</option><option value="en-GB">بریتانیایی</option></select>
+      <label class="lbl">صدای مرورگر</label>
+      <select id="setVoice"></select>
+      <label class="lbl">سرعت پیش‌فرض</label>
+      <input type="range" id="setRate" min="0.6" max="1.2" step="0.05">
+    </div>
+    <div class="card">
+      <h3>🗂 داده‌ها</h3>
+      <div class="row">
+        <button id="btnBackup" class="grow">📥 پشتیبان کامل (JSON)</button>
+        <button id="btnRestore" class="grow">📤 بازگردانی</button>
+      </div>
+      <input type="file" id="restoreFile" accept=".json" hidden>
+      <button id="btnWipe" class="block danger">♻️ بازنشانی همه‌چیز</button>
+      <div id="storeInfo" class="muted small"></div>
+    </div>
+    <div class="card">
+      <h3>ℹ️ راهنما</h3>
+      <ul class="small help">
+        <li><b>آیفون:</b> سافاری → دکمه‌ی Share → «Add to Home Screen» → آیکون مثل اپ باز می‌شود.</li>
+        <li><b>کلید API لازم است</b> برای: تحلیل عکس کتاب، چت با مربی، همنشینی/معادل نیتیو. بدون کلید، دیکشنری + تلفظ + کارت‌ها + پخش صدا کار می‌کند.</li>
+        <li><b>ضبط صدا</b> روی iOS اجازه‌ی میکروفون می‌خواهد و باید آدرس https باشد.</li>
+        <li><b>خواندن متن:</b> دکمه‌ی 🔊 روی هر پیام، فقط خطوط انگلیسی را می‌خواند (فارسی را رد می‌کند).</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<nav id="navbar">
+  <button data-tab="home" class="on">🏠<span>خانه</span></button>
+  <button data-tab="lesson">💬<span>جلسه</span></button>
+  <button data-tab="page">📸<span>صفحه</span></button>
+  <button data-tab="speak">🗣️<span>گفتن</span></button>
+  <button data-tab="video">🎬<span>ویدیو</span></button>
+  <button data-tab="dict">📖<span>واژه</span></button>
+  <button data-tab="more">⋯<span>بیشتر</span></button>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/bookdata.js"></script>
+<script src="js/prompts.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/app.js"></script>
+<script src="js/extra.js"></script>
+</body>
+</html>
