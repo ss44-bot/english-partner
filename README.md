@@ -2,6 +2,23 @@
 
 PWA language coach (RTL / Persian UI) — dictionary, spaced repetition, shadowing, AI lesson chat.
 
+> **Direction:** the product is becoming a **language-coach agent** (planner + memory + tools + voice) for Persian speakers,
+> not a website, app or bot. The roadmap is at the end of [`SKILLS-FA.md`](./SKILLS-FA.md) (Persian).
+
+## Agent skills (installed)
+
+24 top-rated agent skills from GitHub are installed under `.agents/skills/` (mirrored for Claude Code in `.claude/skills/`)
+and pinned in `skills-lock.json` — agent architecture & harness, memory/context, MCP tools, prompt & skill authoring,
+workflow discipline, evals/safety, and the agent's own UI/UX surface.
+
+- How they are wired for agents: [`AGENTS.md`](./AGENTS.md)
+- Full Persian report (source, popularity, use case, roadmap): [`SKILLS-FA.md`](./SKILLS-FA.md)
+
+```bash
+npx skills@latest list    # what is installed
+npx skills@latest update  # pull newer versions
+```
+
 ## Run on the web (GitHub Pages)
 
 **Production URL (after a successful deployment from `main`):**

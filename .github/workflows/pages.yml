@@ -26,9 +26,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify app assets
         run: python3 tests/check_assets.py
+      - name: Stage the app only (keep agent tooling out of the public site)
+        run: |
+          mkdir -p _site
+          cp index.html styles.css sw.js manifest.webmanifest icon.svg icon-180.png icon-512.png _site/
+          cp -r js _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
